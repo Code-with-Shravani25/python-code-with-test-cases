@@ -1,10 +1,13 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# here its copying all files like app.py,requirements.txt and all other files of docker build and all
-COPY . . 
+COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python","app.py"]
+COPY . .
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
